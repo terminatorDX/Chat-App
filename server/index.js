@@ -27,6 +27,7 @@ io.on("connection", socket => {
     });
     socket.on("sendMessage", (message, callback) => {
         const user = getUsers(socket.id);
+        console.log("user is found :", user);
         io.to(user.room).emit("message", { user: user.name, text: message });
         callback();
     });

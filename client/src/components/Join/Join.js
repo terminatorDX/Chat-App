@@ -12,7 +12,7 @@ export default function Join() {
                 <div className="">
                     <input
                         type="text"
-                        placeholder=""
+                        placeholder="Name"
                         className="joinInput"
                         onChange={event => {
                             setName(event.target.value);
@@ -22,7 +22,7 @@ export default function Join() {
                 <div>
                     <input
                         type="text"
-                        placeholder=""
+                        placeholder="Room"
                         className="joinInput"
                         onChange={event => {
                             setRoom(event.target.value);
