@@ -18,11 +18,8 @@ const removeUsers = id => {
         return users.splice(index, 1)[0];
     }
 };
-const getUsers = id => {
-    users.find(user => {
-        user.id === id;
-    });
-};
+const getUsers = id => users.find(user => user.id === id);
+
 const getUsersInUsers = room => {
     users.filter(user => user.room === room);
 };
