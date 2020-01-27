@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import "./Chat.css";
-import io from "socket.io-client";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
+import io from "socket.io-client";
 let socket;
 
 export default function Chat({ location }) {
