@@ -4,9 +4,9 @@ import closeIcon from "../../icons/closeIcon.png";
 import onlineIcon from "../../icons/onlineIcon.png";
 
 const InfoBar = ({ room }) => (
-    <div className="InfoBar">
+    <div className="infoBar">
         <div className="leftInnerContainer">
-            <img src={onlineIcon} alt="online " className="onlineIcon" />
+            <img src={onlineIcon} alt="online" className="onlineIcon" />
             <h3>{room}</h3>
         </div>
         <div className="RightInnerContainer">

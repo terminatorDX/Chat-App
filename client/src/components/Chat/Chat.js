@@ -44,7 +44,7 @@ export default function Chat({ location }) {
     return (
         <div className="outerContainer">
             <div className="container">
-                <InfoBar room={room} />
+                <InfoBar room={room} name={name} />
                 <input
                     type="text"
                     value={message}
