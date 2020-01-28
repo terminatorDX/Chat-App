@@ -6,14 +6,17 @@ const express = require("express"),
     io = socketio(server),
     Port = process.env.Port || 4000,
     router = require("./router"),
+    cors = require("cors"),
     { addUsers, removeUsers, getUsers, getUsersInRoom } = require("./users");
+
+app.use(router);
+app.use(cors);
 
 io.on("connection", socket => {
     socket.on("join", ({ name, room }, callback) => {
         const { error, user } = addUsers({ id: socket.id, name, room });
-        if (error) {
-            return callback(error);
-        }
+        if (error) return callback(error);
+        socket.join(user.room);
         socket.emit("message", {
             user: "admin",
             text: `${user.name}, welcomw to the room ${user.room}`
@@ -28,15 +31,15 @@ io.on("connection", socket => {
     socket.on("sendMessage", (message, callback) => {
         const user = getUsers(socket.id);
         console.log("user is found :", user);
+        if (user.room) return { error: "room not found" };
         io.to(user.room).emit("message", { user: user.name, text: message });
         callback();
     });
     socket.on("disconnect", () => {
-        console.log("user have left");
+        console.log("disconnected :user have left");
     });
 });
 
-app.use(router);
 server.listen(Port, () => {
     console.log(`server has started on port ${Port}`);
 });

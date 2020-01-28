@@ -4,6 +4,7 @@ import "./Chat.css";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 import io from "socket.io-client";
+import Messages from "../Messages/Messages";
 let socket;
 
 export default function Chat({ location }) {
@@ -46,6 +47,7 @@ export default function Chat({ location }) {
         <div className="outerContainer">
             <div className="container">
                 <InfoBar room={room} name={name} />
+                <Messages messages={messages} />
                 <Input
                     message={message}
                     setMessage={setMessage}
