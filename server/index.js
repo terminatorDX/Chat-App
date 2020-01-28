@@ -26,17 +26,37 @@ io.on("connection", socket => {
             text: `${user.name} has joined`
         }); //telling everyone else he has joined
         socket.join(user.room);
+
+        io.to(user.room).emit("roomData", {
+            room: user.room,
+            users: getUsersInRoom(user.room)
+        });
         callback();
     });
     socket.on("sendMessage", (message, callback) => {
         const user = getUsers(socket.id);
         console.log("user is found :", user);
-        if (!user.room) return { error: "room not found" };
-        io.to(user.room).emit("message", { user: user.name, text: message });
+        if (!user) return { error: "room not found" };
+        if (user) {
+            io.to(user.room).emit("message", {
+                user: user.name,
+                text: message
+            });
+            io.to(user.room).emit("roomData", {
+                room: user.room,
+                users: getUsersInRoom(user.room)
+            });
+        }
         callback();
     });
     socket.on("disconnect", () => {
-        console.log("disconnected :user have left");
+        const user = removeUsers(socket.id);
+        if (user) {
+            io.to(user.room).emit("message", {
+                user: "admin",
+                text: `${user.name} has left`
+            });
+        }
     });
 });
 

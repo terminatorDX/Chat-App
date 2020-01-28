@@ -53,6 +53,7 @@ export default function Chat({ location }) {
                     setMessage={setMessage}
                     sendMessage={sendMessage}
                 />
+                <TextContainer users={users} />
             </div>
         </div>
     );
