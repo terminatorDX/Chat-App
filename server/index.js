@@ -31,7 +31,7 @@ io.on("connection", socket => {
     socket.on("sendMessage", (message, callback) => {
         const user = getUsers(socket.id);
         console.log("user is found :", user);
-        if (user.room) return { error: "room not found" };
+        if (!user.room) return { error: "room not found" };
         io.to(user.room).emit("message", { user: user.name, text: message });
         callback();
     });
