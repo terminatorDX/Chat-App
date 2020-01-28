@@ -53,14 +53,6 @@ export default function Chat({ location }) {
                     setMessage={setMessage}
                     sendMessage={sendMessage}
                 />
-                <input
-                    type="text"
-                    value={message}
-                    onChange={event => setMessage(event.target.value)}
-                    onKeyPress={event =>
-                        event.key === "Enter" ? sendMessage(event) : null
-                    }
-                />
             </div>
         </div>
     );
