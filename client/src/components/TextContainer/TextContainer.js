@@ -1,7 +1,6 @@
 import React from "react";
 
 import onlineIcon from "../../icons/onlineIcon.png";
-
 import "./TextContainer.css";
 
 const TextContainer = ({ users }) => (
@@ -10,7 +9,7 @@ const TextContainer = ({ users }) => (
             <h1>
                 Realtime Chat Application{" "}
                 <span role="img" aria-label="emoji">
-                    💬
+                    TextContainer💬
                 </span>
             </h1>
             <h2>

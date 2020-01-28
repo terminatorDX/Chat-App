@@ -5,11 +5,13 @@ import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 import io from "socket.io-client";
 import Messages from "../Messages/Messages";
+import TextContainer from "../TextContainer/TextContainer";
 let socket;
 
 export default function Chat({ location }) {
     const [name, setName] = useState(""),
         [room, setRoom] = useState(""),
+        [users, setUsers] = useState(""),
         [messages, setMessages] = useState([]),
         [message, setMessage] = useState(""),
         endpoint = "localhost:4000";
@@ -33,6 +35,13 @@ export default function Chat({ location }) {
         socket.on("message", message => {
             setMessages([...messages, message]);
         });
+        socket.on("roomData", ({ users }) => {
+            setUsers(users);
+        });
+        return () => {
+            socket.emit("disconnect");
+            socket.off();
+        };
     }, [messages]);
 
     //function for sending messages
